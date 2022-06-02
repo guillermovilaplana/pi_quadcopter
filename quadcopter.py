@@ -24,7 +24,7 @@ class Quadcopter:
         time.sleep(2)
 
     def turn_off_esc(self):
-        [pi.set_servo_pulsewidth(esc_pin, 0) for pi, esc_pin in zip(self._pis, self._esc_pins)]
+        [pi.set_servo_pulsewidth(esc_pin, self._min_pulse_width) for pi, esc_pin in zip(self._pis, self._esc_pins)]
         [pi.stop() for pi in self._pis]
 
     def _fan_percentage_to_dutycycle(self, fan_percentage):
@@ -43,4 +43,5 @@ class Quadcopter:
     def throttle(self, throttle):
         self._throttle = throttle
         self._set_dutycycles()
+        # print(self._fan_percentage_to_dutycycle(1))
 

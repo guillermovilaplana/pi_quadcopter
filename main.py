@@ -5,7 +5,7 @@ import time
 
 def main():
     drone = quadcopter.Quadcopter()
-    drone.calibrate_esc()
+    # drone.calibrate_esc()
 
     t = transmitter.Transmitter(drone)
 
