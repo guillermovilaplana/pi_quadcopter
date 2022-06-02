@@ -1,4 +1,5 @@
 import time
+import pigpio
 
 
 class Quadcopter:
