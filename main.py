@@ -1,9 +1,14 @@
 import transmitter
+import quadcopter
 import time
 
 
 def main():
-    t = transmitter.Transmitter()
+    drone = quadcopter.Quadcopter()
+    drone.calibrate_esc()
+
+    t = transmitter.Transmitter(drone)
+
     try:
         t.start()
         time.sleep(60)
@@ -12,6 +17,9 @@ def main():
         print('Keyboard Interrupt, cleaning up...')
     finally:
         t.close()
+        drone.turn_off_esc()
+
+    print('Finished')
 
 
 # Press the green button in the gutter to run the script.

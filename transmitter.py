@@ -1,10 +1,12 @@
 import pigpio
 
+from quadcopter import Quadcopter
+
 _tick: float = 0
 
 
 class Transmitter:
-    def __init__(self):
+    def __init__(self, drone: Quadcopter):
         # Throttle pin
         self._throttle_pin = 22
 
@@ -19,6 +21,8 @@ class Transmitter:
 
         self._cb1 = None
         self._cb2 = None
+
+        self._drone = drone
 
     def start(self):
         self._cb1 = self._pi.callback(self._throttle_pin, pigpio.RISING_EDGE, self._set_rising_time)
@@ -47,6 +51,7 @@ class Transmitter:
                 # pass
                 print((tick-_tick)/1000)
                 print(self._tick)
+                # self._drone.throttle =
                 self._tick = tick
                 _tick = 0
         return _set_output
